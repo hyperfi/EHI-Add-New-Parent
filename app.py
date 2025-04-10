@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from extentions import db, security, cache
 import entry_views
+import business_views
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -36,6 +37,7 @@ def create_app():
     app.config['SECURITY_CSRF_IGNORE_UNAUTH_ENDPOINTS'] = True
 
     entry_views.create_entery_view(app)
+    business_views.Create_business_view(app)
     return app
 
 

@@ -41,34 +41,61 @@ class ParentCustomer(db.Model):
 #     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
 
 
-# class Course(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100), nullable=False)
-#     description = db.Column(db.String(200), nullable=False)
-#     duration = db.Column(db.String(50), nullable=False)
-#     fee = db.Column(db.Float, nullable=False)
-#     instructor = db.Column(db.String(100), nullable=False)
-#     start_date = db.Column(db.String(50), nullable=False)
-#     end_date = db.Column(db.String(50), nullable=False)
-#     enrolled_students = db.relationship('Student', backref='course', lazy=True)
+class Course(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    duration = db.Column(db.String(50), nullable=False)
+    fee = db.Column(db.Float, nullable=False)
+    instructor = db.Column(db.String(100), nullable=False)
+    # many-to-many relationship with Student
+    enrolled_students = db.relationship(
+        'Student', backref='course', lazy=True, secondary='student_course')
 
-#     def __repr__(self):
-#         return f'<Course {self.name}>'
+    def __repr__(self):
+        return f'<Course {self.name}>'
 
 
-# class Student(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100), nullable=False)
-#     age = db.Column(db.Integer, nullable=False)
-#     email = db.Column(db.String(100), unique=True, nullable=False)
-#     phone = db.Column(db.String(15), unique=True, nullable=False)
-#     address = db.Column(db.String(200), nullable=False)
-#     course_id = db.Column(db.Integer, db.ForeignKey(
-#         'course.id'), nullable=False)
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    className = db.Column(db.String(50), nullable=False)
 
-#     def __repr__(self):
-#         return f'<Student {self.name}>'
+    def __repr__(self):
+        return f'<Student {self.name}>'
 
+
+class student_course(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey(
+        'student.id'), nullable=False)  # Foreign key to Student
+
+    course_id = db.Column(db.Integer, db.ForeignKey(
+        'course.id'), nullable=False)  # Foreign key to Course
+
+
+class Batch(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey(
+        'course.id'), nullable=False)  # Foreign key to Course
+    batch_name = db.Column(db.String(100), nullable=False)
+    start_date = db.Column(db.String(50), nullable=False)
+    end_date = db.Column(db.String(50), nullable=False)
+
+    course = db.relationship('Course', backref='batch', lazy=True)
+    # One-to-many relationship with Student
+    enrolled_students = db.relationship(
+        'Student', backref='batch', lazy=True, secondary='batch_students')
+
+    def __repr__(self):
+        return f'<Batch {self.batch_name}>'
+
+
+class batch_students(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    batch_id = db.Column(db.Integer, db.ForeignKey('batch.id'), nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey(
+        'student.id'), nullable=False)
 
 # class Instructor(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
