@@ -29,7 +29,8 @@ const Home = {
           </div>
           <button type="submit" class="btn btn-primary w-100" @click="submitForm">Submit</button>
       </form>
-      <div class="mt-5">
+      <div class="mt-5" v-if="entries.length > 0">
+          <h2 class="text-center mb-4">Existing Entries</h2>
           <h1 class="text-center mb-4">Parent Customer Entries</h1>
           <table class="table table-striped table-bordered">
               <thead class="table-dark">
