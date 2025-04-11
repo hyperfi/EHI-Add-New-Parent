@@ -16,8 +16,8 @@ def create_entery_view(app):
         if not data:
             return jsonify({"message": "No data provided"}), 400
         # # Process the data as needed
-        found_entry = db.session.query(parent_customer).filter_by(
-            parent_contact=data['parentContact']).first()
+        found_entry = db.session.query(parent_customer).filter(
+            (parent_customer.parent_contact == data['parentContact']) & (parent_customer.child_name == data['childName'])).first()
         print(found_entry)
         if found_entry:
             return jsonify({"message": "Entry already exists"}), 400

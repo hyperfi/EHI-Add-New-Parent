@@ -152,7 +152,7 @@ def Create_business_view(app):
         for course in courses:
             course_list.append({
                 'id': course.id,
-                'course_name': course.course_name,
+                'course_name': course.name,
                 'description': course.description,
                 'duration': course.duration,
                 'fee': course.fee,
