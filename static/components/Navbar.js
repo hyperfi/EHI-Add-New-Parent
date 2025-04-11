@@ -1,25 +1,23 @@
 const Navbar = {
   template: `
-    <nav class="h2 navbar navbar-expand-sm navbar-dark">
-      <img src="/static/images/logo.jpg" alt="" width="50" height="50" style="position: absolute; left: 10px; top: 10px" class="rounded-circle">
-      <div class="container-fluid d-flex justify-content-center gap-5">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="mx-auto collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item me-2">
-              <router-link to="/">
-                <button type="button" class="btn btn-bg-custom shadow">Home</button>
-              </router-link>
-            </li>
-            <li class="nav-item me-2">
-              <router-link to="/view_all_students">
-                <button type="button" class="btn btn-bg-custom shadow">View All Students</button>
-              </router-link>
-            </li>
-          </ul>
-        </div>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container-fluid d-flex justify-content-center">
+        <!-- Logo -->
+        <img src="/static/images/logo.jpg" alt="Logo" width="50" height="50" class="rounded-circle me-3">
+        
+        <!-- Navbar Links -->
+        <ul class="navbar-nav d-flex flex-row gap-3">
+          <li class="nav-item">
+            <router-link to="/" class="btn btn-primary">
+              Home
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/view_all_students" class="btn btn-primary">
+              View All Students
+            </router-link>
+          </li>
+        </ul>
       </div>
     </nav>
   `,
