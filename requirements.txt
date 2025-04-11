@@ -3,3 +3,4 @@ flask_sqlalchemy
 flask_security
 flask_caching
 gunicorn
+setuptools
